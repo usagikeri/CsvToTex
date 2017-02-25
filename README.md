@@ -1,19 +1,21 @@
 # CsvToTex
 Convert csv file to tex table format.  
-This program was created by <font color="Python3.5.1"></font>.
-It does not run in <font color="Python2"></font>.
+This program was created by Python3.5.1.
+It does not run in Python2.
 
 ## Usage
-`$python csvToTex.py inputTest.csv`  
+`$python csvToTex.py input.csv`  
 As a result, "output.tex" is output.
 
-```csv:inputTest.csv
+input.csv
+```
 Menu,Price(yen)
 Rice,100
 Bread,120
-```  
-```tex:output.tex
-\documentclass{jarticle}
+```
+output.tex
+```
+\documentclass{article}
 
 \begin{document}
 
