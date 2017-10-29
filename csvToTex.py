@@ -40,8 +40,10 @@ class CsvToTex():
         return self.spchar_escape(txt).replace(","," & ")
 
     def r_and_w(self,filename):
+        stdout = []
         with open("output.tex","w") as texfile:
             texfile.write(self.begin)
+            stdout.append("{}".format(self.begin))
             with open(filename,"r") as csvfile:
                 reader = csv.reader(csvfile)
                 header = next(reader)
@@ -49,15 +51,20 @@ class CsvToTex():
                 texfile.write("\t"+"\\begin{tabular}{|"+str("c|" * len(header))+"} \hline\n")
                 header = ','.join(header)
                 texfile.write("\t"+self.convert(header)+" \\\\ \hline\n")
+                stdout.append("{}".format("\t"+self.convert(header)+" \\\\ \hline\n"))
 
                 for line in reader:
                     line = ','.join(line)
                     value = self.convert(line)
                     texfile.write("\t"+value.rstrip()+" \\\\ \hline\n")
+                    stdout.append("{}".format("\t"+value.rstrip()+" \\\\ \hline\n"))
             texfile.write(self.end)
+            stdout.append("{}".format(self.end))
+
+        return stdout
 
 if __name__ == '__main__':
     args = sys.argv
     filename = args[1]
     ctt = CsvToTex()
-    ctt.r_and_w(filename)
+    print("".join(ctt.r_and_w(filename)))
