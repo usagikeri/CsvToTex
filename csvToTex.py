@@ -49,6 +49,7 @@ class CsvToTex():
                 header = next(reader)
 
                 texfile.write("\t"+"\\begin{tabular}{|"+str("c|" * len(header))+"} \hline\n")
+                stdout.append("{}".format("\t"+"\\begin{tabular}{|"+str("c|" * len(header))+"} \hline\n"))
                 header = ','.join(header)
                 texfile.write("\t"+self.convert(header)+" \\\\ \hline\n")
                 stdout.append("{}".format("\t"+self.convert(header)+" \\\\ \hline\n"))
